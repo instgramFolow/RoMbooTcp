@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Python Obfuscator | مشفر ملفات بايثون</title>
+    <style>
+        /* CSS لخدمة المظهر الاحترافي */
+        :root {
+            --primary-color: #00d2ff;
+            --secondary-color: #3a7bd5;
+            --bg-dark: #0f172a;
+            --text-light: #f8fafc;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--bg-dark) 0%, #1e293b 100%);
+            color: var(--text-light);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        p { color: #94a3b8; font-size: 14px; margin-bottom: 30px; }
+
+        .upload-area {
+            border: 2px dashed #334155;
+            padding: 30px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        .upload-area:hover {
+            border-color: var(--primary-color);
+            background: rgba(0, 210, 255, 0.05);
+        }
+
+        input[type="file"] {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0; left: 0;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .btn-encrypt {
+            margin-top: 25px;
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .btn-encrypt:active { transform: scale(0.98); }
+
+        /* شريط التحميل */
+        .loader {
+            display: none;
+            margin-top: 20px;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #334155;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            width: 0%;
+            height: 100%;
+            background: var(--primary-color);
+            transition: width 2s;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🛡️ مشفر بايثون المحترف</h1>
+    <p>قم بحماية كود البوت الخاص بك من السرقة أو التعديل</p>
+
+    <form id="encryptForm" action="/encrypt" method="POST" enctype="multipart/form-data">
+        <div class="upload-area" id="dropZone">
+            <img src="https://img.icons8.com/fluency/48/000000/python.png" alt="Python Logo"><br>
+            <span id="fileName">اسحب الملف هنا أو اضغط للاختيار</span>
+            <input type="file" name="file" id="fileInput" accept=".py" required>
+        </div>
+
+        <button type="submit" class="btn-encrypt">تشفير الملف الآن 🔐</button>
+    </form>
+
+    <div class="loader" id="loader">
+        <p id="statusText">جاري تشفير ملفك بصيغة PyArmor...</p>
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const fileInput = document.getElementById('fileInput');
+    const fileName = document.getElementById('fileName');
+    const form = document.getElementById('encryptForm');
+    const loader = document.getElementById('loader');
+    const progressFill = document.getElementById('progressFill');
+
+    // عرض اسم الملف عند اختياره
+    fileInput.onchange = () => {
+        if(fileInput.files.length > 0) {
+            fileName.innerText = "الملف المختار: " + fileInput.files[0].name;
+            fileName.style.color = "#00d2ff";
+        }
+    };
+
+    // محاكاة عملية التشفير عند الإرسال
+    form.onsubmit = (e) => {
+        // إذا كنت تستخدم السيرفر الحقيقي (Flask)، قم بإلغاء e.preventDefault()
+        // e.preventDefault(); 
+        
+        loader.style.display = 'block';
+        setTimeout(() => {
+            progressFill.style.width = '100%';
+        }, 100);
+
+        // هنا السكربت سينتظر رد السيرفر ويحمل الملف تلقائياً
+    };
+</script>
+
+</body>
+</html>
